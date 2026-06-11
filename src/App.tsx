@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FaHeart, FaGift, FaCalendarAlt, FaCamera, 
   FaMusic, FaStar, FaRegHeart,
-  FaEnvelope, FaRegSmile, FaLeaf, FaInfinity, FaGem, FaClock as FaHistory, FaMask,FaFrown, 
-  FaHandHoldingHeart, FaGamepad, FaCheckCircle, FaTimesCircle,
+  FaEnvelope, FaLeaf, FaInfinity, FaGem, FaClock as FaHistory, FaMask,
+  FaHandHoldingHeart, FaGamepad, FaCheckCircle,
   FaArrowRight, FaArrowLeft, FaDice, FaRegLaugh, FaSpinner, FaPlay, 
   FaGraduationCap,FaEnvelopeOpen, FaRegEnvelope, FaRegEnvelopeOpen,
   FaPaperPlane
