@@ -598,21 +598,22 @@ const App: React.FC = () => {
     setQuizAnswers(prev => ({ ...prev, [questionId]: answer }));
   };
 
-  const handleQuizSubmit = () => {
-    let correctCount = 0;
-    quizQuestions.forEach(q => {
-      if (quizAnswers[q.id] === q.correct) {
-        correctCount++;
-      }
-    });
-    const percentage = (correctCount / quizQuestions.length) * 100;
-    setQuizScore(percentage);
-    setQuizSubmitted(true);
-    
-    if (percentage === 100) {
-      setShowConfetti(true);
+const handleQuizSubmit = () => {
+  let correctCount = 0;
+  quizQuestions.forEach(q => {
+    if (quizAnswers[q.id] === q.correct) {
+      correctCount++;
     }
-  };
+  });
+  const percentage = (correctCount / quizQuestions.length) * 100;
+  setQuizScore(percentage);
+  setQuizSubmitted(true);
+  
+  // Mostrar confetti apenas para 100%
+  if (percentage === 100) {
+    setShowConfetti(true);
+  }
+};
 
   const resetQuiz = () => {
     setQuizAnswers({});
@@ -3051,7 +3052,7 @@ const App: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* Modal do Quiz - Responsivo */}
+            {/* Modal do Quiz - Responsivo */}
       <AnimatePresence>
         {showQuiz && (
           <motion.div
@@ -3190,31 +3191,81 @@ const App: React.FC = () => {
                     padding: 'clamp(1rem, 4vw, 1.5rem)',
                     background: quizScore === 100 
                       ? 'rgba(76, 175, 80, 0.15)' 
-                      : quizScore >= 70 
+                      : quizScore > 50 
                         ? 'rgba(255, 152, 0, 0.15)'
                         : 'rgba(244, 67, 54, 0.15)',
                     borderRadius: '20px',
                     marginBottom: '1rem'
                   }}>
+                    {/* Imagem baseada na pontuação */}
+                    {quizScore === 100 ? (
+                      <img 
+                        src="/photos/bom.png" 
+                        alt="Bom!" 
+                        style={{ 
+                          width: 'clamp(120px, 30vw, 180px)', 
+                          height: 'auto',
+                          marginBottom: '0.8rem',
+                          borderRadius: '16px'
+                        }}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = 'none';
+                        }}
+                      />
+                    ) : quizScore > 50 ? (
+                      <img 
+                        src="/photos/medio.png" 
+                        alt="Médio" 
+                        style={{ 
+                          width: 'clamp(120px, 30vw, 180px)', 
+                          height: 'auto',
+                          marginBottom: '0.8rem',
+                          borderRadius: '16px'
+                        }}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = 'none';
+                        }}
+                      />
+                    ) : (
+                      <img 
+                        src="/photos/ruim.png" 
+                        alt="Ruim" 
+                        style={{ 
+                          width: 'clamp(120px, 30vw, 180px)', 
+                          height: 'auto',
+                          marginBottom: '0.8rem',
+                          borderRadius: '16px'
+                        }}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = 'none';
+                        }}
+                      />
+                    )}
+                    
+                    {/* Frases personalizadas */}
                     {quizScore === 100 ? (
                       <>
-                        <FaStar size={clampIconSize(40, 60)} color="#FFD700" style={{ marginBottom: '0.8rem' }} />
-                        <h4 style={{ color: '#4CAF50', fontSize: 'clamp(1.3rem, 5vw, 1.8rem)', marginBottom: '0.3rem' }}>PARABÉNS! 🎉</h4>
-                        <p style={{ color: '#4a4a4a', fontSize: 'clamp(0.85rem, 3vw, 1rem)' }}>Você acertou todas as perguntas! Você realmente me conhece muito bem! ❤️</p>
+                        <h4 style={{ color: '#4CAF50', fontSize: 'clamp(1.3rem, 5vw, 1.8rem)', marginBottom: '0.3rem' }}>🎉 PERFEITA! 🎉</h4>
+                        <p style={{ color: '#4a4a4a', fontSize: 'clamp(0.9rem, 3.5vw, 1.1rem)', fontWeight: '500' }}>
+                          Estamos juntas para sempre, você realmente me conhece mesmo! ❤️
+                        </p>
                       </>
-                    ) : quizScore >= 70 ? (
+                    ) : quizScore > 50 ? (
                       <>
-                        <FaRegSmile size={clampIconSize(40, 60)} color="#FF9800" style={{ marginBottom: '0.8rem' }} />
-                        <h4 style={{ color: '#FF9800', fontSize: 'clamp(1.2rem, 5vw, 1.5rem)', marginBottom: '0.3rem' }}>Quase lá! 😊</h4>
-                        <p style={{ color: '#4a4a4a', fontSize: 'clamp(0.85rem, 3vw, 1rem)' }}>Você acertou {Math.round(quizScore)}% das perguntas. Precisa prestar mais atenção em mim! 💕</p>
+                        <h4 style={{ color: '#FF9800', fontSize: 'clamp(1.2rem, 5vw, 1.6rem)', marginBottom: '0.3rem' }}>🤔 QUASE LÁ...</h4>
+                        <p style={{ color: '#4a4a4a', fontSize: 'clamp(0.9rem, 3.5vw, 1.1rem)', fontWeight: '500' }}>
+                          Não tá pronta para casar, mas vou te dar um tempinho para me conhecer melhor! 💭
+                        </p>
                       </>
                     ) : (
                       <>
-                        <FaFrown size={clampIconSize(40, 60)} color="#F44336" style={{ marginBottom: '0.8rem' }} />
-                        <h4 style={{ color: '#F44336', fontSize: 'clamp(1.2rem, 5vw, 1.5rem)', marginBottom: '0.3rem' }}>Precisamos conversar... 😅</h4>
-                        <p style={{ color: '#4a4a4a', fontSize: 'clamp(0.85rem, 3vw, 1rem)' }}>Você acertou apenas {Math.round(quizScore)}% das perguntas. Vamos passar mais tempo juntas para você me conhecer melhor! 💗</p>
+                        <h4 style={{ color: '#F44336', fontSize: 'clamp(1.2rem, 5vw, 1.6rem)', marginBottom: '0.3rem' }}>⚠️ ATENÇÃO! ⚠️</h4>
+                        <p style={{ color: '#4a4a4a', fontSize: 'clamp(0.9rem, 3.5vw, 1.1rem)', fontWeight: '500' }}>
+                          Vamos ter uma conversa séria agora! 😤
+                        </p>
                       </>
                     )}
+                    
                     <div style={{
                       marginTop: '0.8rem',
                       fontSize: 'clamp(1rem, 4vw, 1.2rem)',
@@ -3225,80 +3276,63 @@ const App: React.FC = () => {
                     </div>
                   </div>
 
-                  <div style={{ marginBottom: '1rem' }}>
-                    <h5 style={{ color: '#ff6b6b', marginBottom: '0.8rem', textAlign: 'center', fontSize: 'clamp(0.9rem, 3.5vw, 1rem)' }}>Respostas corretas:</h5>
-                    {quizQuestions.map(q => (
-                      <div key={q.id} style={{
+                  {/* Botões lado a lado */}
+                  <div style={{
+                    display: 'flex',
+                    gap: '0.8rem',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center'
+                  }}>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={resetQuiz}
+                      style={{
+                        flex: 1,
+                        minWidth: '140px',
+                        padding: 'clamp(0.6rem, 2.5vw, 0.8rem)',
+                        background: 'linear-gradient(135deg, #ff6b6b, #ff8e8e)',
+                        border: 'none',
+                        borderRadius: '50px',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        fontSize: 'clamp(0.85rem, 3vw, 1rem)',
+                        cursor: 'pointer',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '0.4rem',
-                        marginBottom: '0.6rem',
-                        padding: '0.4rem',
-                        background: quizAnswers[q.id] === q.correct 
-                          ? 'rgba(76, 175, 80, 0.1)' 
-                          : 'rgba(244, 67, 54, 0.05)',
-                        borderRadius: '10px'
-                      }}>
-                        {quizAnswers[q.id] === q.correct ? (
-                          <FaCheckCircle color="#4CAF50" size={clampIconSize(14, 18)} />
-                        ) : (
-                          <FaTimesCircle color="#F44336" size={clampIconSize(14, 18)} />
-                        )}
-                        <span style={{ fontSize: 'clamp(0.75rem, 3vw, 0.85rem)', color: '#4a4a4a' }}>
-                          <strong>{q.question}</strong> → {q.correct}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                        justifyContent: 'center',
+                        gap: '0.5rem'
+                      }}
+                    >
+                      <FaGamepad size={clampIconSize(12, 16)} /> Tentar Novamente
+                    </motion.button>
 
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={resetQuiz}
-                    style={{
-                      width: '100%',
-                      padding: 'clamp(0.6rem, 2.5vw, 0.8rem)',
-                      background: 'linear-gradient(135deg, #ff6b6b, #ff8e8e)',
-                      border: 'none',
-                      borderRadius: '50px',
-                      color: 'white',
-                      fontWeight: 'bold',
-                      fontSize: 'clamp(0.85rem, 3vw, 1rem)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '0.5rem',
-                      marginBottom: '0.6rem'
-                    }}
-                  >
-                    <FaGamepad size={clampIconSize(12, 16)} /> Tentar Novamente
-                  </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={closeQuiz}
+                      style={{
+                        flex: 1,
+                        minWidth: '100px',
+                        padding: 'clamp(0.6rem, 2.5vw, 0.8rem)',
+                        background: 'rgba(255,107,107,0.15)',
+                        border: '1px solid rgba(255,107,107,0.3)',
+                        borderRadius: '50px',
+                        color: '#ff6b6b',
+                        fontWeight: 'bold',
+                        fontSize: 'clamp(0.8rem, 3vw, 0.9rem)',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '0.5rem'
+                      }}
+                    >
+                      Fechar
+                    </motion.button>
+                  </div>
                 </>
               )}
-
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={closeQuiz}
-                style={{
-                  width: '100%',
-                  padding: 'clamp(0.6rem, 2.5vw, 0.8rem)',
-                  background: 'rgba(255,107,107,0.15)',
-                  border: '1px solid rgba(255,107,107,0.3)',
-                  borderRadius: '50px',
-                  color: '#ff6b6b',
-                  fontWeight: 'bold',
-                  fontSize: 'clamp(0.8rem, 3vw, 0.9rem)',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.5rem'
-                }}
-              >
-                Fechar
-              </motion.button>
             </motion.div>
           </motion.div>
         )}
