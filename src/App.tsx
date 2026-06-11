@@ -2,26 +2,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  FaHeart, FaGift, FaClock, FaCalendarAlt, FaCamera, 
-  FaMusic, FaStar, FaGlassCheers, FaPlane, FaFilm,
-  FaBirthdayCake, FaTree, FaUmbrella, FaRegHeart,
-  FaEnvelope, FaRegSmile, FaLeaf, FaSun, FaMoon,
-  FaUtensils, FaCoffee, FaWineBottle, FaCloudSun,
-  FaSnowflake, FaFire, FaDove, FaInfinity, FaGem,
-  FaMapMarkerAlt, FaClock as FaHistory, FaMask, FaSmile,
-  FaFrown, FaSadTear, FaAngry, FaQuestion, FaExclamationTriangle,
-  FaHeartbeat, FaHandHoldingHeart, FaGrinHearts, FaMeh,
-  FaTired, FaFrownOpen, FaGripfire, FaGamepad, FaCheckCircle, FaTimesCircle,
-  FaArrowRight, FaArrowLeft, FaDice, FaRegLaugh, FaSpinner, FaWheelchair,
-  FaUndo, FaStepBackward, FaStepForward, FaPlay, FaRandom, FaGraduationCap,
-  FaEnvelopeOpen, FaEnvelopeSquare, FaMailBulk, FaRegEnvelope, FaRegEnvelopeOpen,
-  FaStamp, FaAddressCard, FaInbox, FaPaperPlane, 
-  FaPause
+  FaHeart, FaGift, FaCalendarAlt, FaCamera, 
+  FaMusic, FaStar, FaRegHeart,
+  FaEnvelope, FaRegSmile, FaLeaf, FaInfinity, FaGem, FaClock as FaHistory, FaMask,FaFrown, 
+  FaHandHoldingHeart, FaGamepad, FaCheckCircle, FaTimesCircle,
+  FaArrowRight, FaArrowLeft, FaDice, FaRegLaugh, FaSpinner, FaPlay, 
+  FaGraduationCap,FaEnvelopeOpen, FaRegEnvelope, FaRegEnvelopeOpen,
+  FaPaperPlane
 } from 'react-icons/fa';
-import { MdOutlineSentimentSatisfied, MdOutlineSentimentDissatisfied, MdOutlineSentimentVeryDissatisfied, MdOutlineEmojiEmotions, MdOutlineMoodBad, MdMarkEmailRead, MdMailOutline, MdEmail, MdOutlineMail, MdMarkEmailUnread, MdOutlineMailOutline } from 'react-icons/md';
-import { GiAngryEyes, GiBrokenHeart, GiLoveLetter, GiPostStamp, GiLetterBomb, GiMailbox } from 'react-icons/gi';
-import { IoMailOpenOutline, IoMailOutline, IoMailUnreadOutline, IoSendOutline, IoArchiveOutline } from 'react-icons/io5';
-import { RiMailSendLine, RiMailCheckLine, RiMailUnreadLine, RiMailCloseLine, RiMailAddLine } from 'react-icons/ri';
+import {  MdMarkEmailRead, MdOutlineMail } from 'react-icons/md';
+import {GiLoveLetter, GiMailbox } from 'react-icons/gi';
+import { IoMailOpenOutline, IoMailOutline, IoMailUnreadOutline} from 'react-icons/io5';
+import { RiMailSendLine, RiMailCheckLine, RiMailUnreadLine } from 'react-icons/ri';
 
 // Função auxiliar para tamanhos de ícone responsivos
 function clampIconSize(min: number, max: number): number {
@@ -435,7 +427,6 @@ const App: React.FC = () => {
   const [currentReasonIndex, setCurrentReasonIndex] = useState(0);
   
   // Roulette states
-  const [showRoulette, setShowRoulette] = useState(false);
   const [rouletteResult, setRouletteResult] = useState<{ type: string; text: string; icon: any } | null>(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [showWheel, setShowWheel] = useState(false);
@@ -461,9 +452,9 @@ const App: React.FC = () => {
           .then(() => {
             setIsMusicPlaying(true);
           })
-          .catch(error => {
-            setIsMusicPlaying(false);
-          });
+          .catch(() => {
+          setIsMusicPlaying(false);
+        })
       }
     }
   }, []);
@@ -650,10 +641,6 @@ const App: React.FC = () => {
     setShowConfetti(true);
   };
   
-  // Functions for Roulette - Wheel style
-  const openRoulette = () => {
-    setShowWheel(true);
-  };
   
   const spinRoulette = () => {
     if (isSpinning) return;
