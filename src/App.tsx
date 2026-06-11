@@ -279,6 +279,7 @@ styleSheet.textContent = `
 document.head.appendChild(styleSheet);
 
 // Quiz questions
+// Quiz questions
 const quizQuestions = [
   { id: 1, question: "O que a Ana prefere?", options: ["Gato", "Cachorro"], correct: "Gato" },
   { id: 2, question: "O que a Ana prefere?", options: ["Salgado", "Doce"], correct: "Doce" },
@@ -286,9 +287,26 @@ const quizQuestions = [
   { id: 4, question: "Qual a cor favorita da Ana?", options: ["Roxo", "Preto", "Vermelho", "Azul"], correct: "Azul" },
   { id: 5, question: "Qual é meu doce favorito?", options: ["Pudim", "Sorvete", "Açaí", "Chocolate"], correct: "Sorvete" },
   { id: 6, question: "Ana prefere:", options: ["Praia", "Piscina"], correct: "Praia" },
-  { id: 7, question: "Qual estilo musical favorito da Ana?", options: ["Funk", "Trap", "Sertanejo", "MPB"], correct: "Sertanejo" }
+  { id: 7, question: "Qual estilo musical favorito da Ana?", options: ["Funk", "Trap", "Sertanejo", "MPB"], correct: "Sertanejo" },
+  { id: 8, question: "O que a Ana prefere?", options: ["Filme", "Série"], correct: "Filme" },
+  { id: 9, question: "Qual hobbie favorito de Ana?", options: ["Tocar Instrumentos", "Desenhar", "Cantar", "Jogar VideoGame"], correct: "Tocar Instrumentos" },
+  { id: 10, question: "Qual bebida a Ana prefere?", options: ["Refrigerante", "Suco", "Água", "Energético"], correct: "Suco" },
+  { id: 11, question: "O que a Ana escolheria para um encontro?", options: ["Jantar romântico", "Cinema", "Passeio ao ar livre", "Ficar em casa assistindo filme"], correct: "Jantar romântico" },
+  { id: 12, question: "Se a Ana pudesse escolher um presente, seria:", options: ["Celular novo", "Viagem", "Roupas", "Dinheiro"], correct: "Roupas" },
+  { id: 13, question: "O que a Ana prefere assistir?", options: ["Terror", "Comédia", "Romance", "Comedia Romantica", "Ação"], correct: "Comedia Romantica" },
+  { id: 14, question: "Se pudesse escolher um lugar agora, a Ana iria para:", options: ["Praia", "Montanha", "Parque", "Shopping"], correct: "Praia" },
+  { id: 15, question: "O que a Ana prefere em um dia de chuva?", options: ["Dormir", "Assistir filme", "Ler", "Comer besteiras"], correct: "Assistir filme" },
+  { id: 16, question: "O que a Ana prefere?", options: ["Abraço", "Beijo"], correct: "Beijo" },
+  { id: 17, question: "Se a Ana nao tivesse cursando Eng. de Computacao, o que ela estaria cursando?", options: ["Medicina", "Psicologia", "Mecatronica", "Educacao fisica"], correct: "Psicologia" },
+  { id: 18, question: "Qual é o maior medo da Ana?", options: ["Altura", "Escuro", "Insetos", "Outro"], correct: "Altura" },
+  { id: 19, question: "Qual o signo de Ana?", options: ["Virgem", "Cancer", "Touro", "Peixes"], correct: "Touro" },
+  { id: 20, question: "Qual dessas comidas a Ana recusaria primeiro?", options: ["Jiló", "Fígado", "Quiabo", "Peixe"], correct: "Jiló" },
+  { id: 21, question: "Qual tipo de chocolate favorito de Ana?", options: ["Ao Leite", "Amargo", "Meio Amargo", "Oreo"], correct: "Oreo" },
+  { id: 22, question: "O que a Ana mais compra sem precisar?", options: ["Roupas", "Doces", "Tenis", "Coisas aleatórias da internet"], correct: "Tenis" },
+  { id: 23, question: "O que a Ana sempre leva quando sai de casa?", options: ["Celular", "Fone de ouvido", "Garrafinha de água", "Bolsa"], correct: "Fone de ouvido" },
+  { id: 24, question: "Qual é o ponto fraco da Ana?", options: ["Chocolate", "Carinho e sexo", "Animais fofos", "Musica"], correct: "Carinho e sexo" },
+  { id: 25, question: "Qual divertidamente mais se parece com a Ana?", options: ["Ansiedade", "Alegria", "Tristeza", "Vergonha", "Nojinho"], correct: "Ansiedade" }
 ];
-
 // 100 Reasons
 const reasons = Array(100).fill(null).map((_, i) => {
   const reasonsList = [
